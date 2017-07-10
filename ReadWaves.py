@@ -1,10 +1,9 @@
-import os,wave,struct,pyaudio,sys,math;
+import os, wave, struct, sys, math;
 import numpy as np;
 import scipy.io.wavfile as wav
-import python_speech_features
+from sklearn.cluster import KMeans
 from pandas import Series, DataFrame
-from python_speech_features import mfcc
-from python_speech_features import logfbank
+
 
 def hfd(X, Kmax):
     L = []
@@ -23,35 +22,50 @@ def hfd(X, Kmax):
         (p, r1, r2, s) = np.linalg.lstsq(x, L)
     return p[0]
 
-path='D:\\My Source Codes\\Projects-Python\\Steganalysis\\clean';
-root, dirs, files = next(os.walk(path));
-sr=[];
-x=[];
-xf=[];
-for file in files:
-    sr_value, x_value = wav.read(root+'\\'+file);
-    sr.append(sr_value);
-    x.append(x_value);
-    f=[];
 
-    length = len(x_value);
-    window_hop_length = 0.02  # 20ms
-    overlap = int(sr_value * window_hop_length);
-    window_size = 0.05  # 5 ms
-    framesize = int(window_size * sr_value);
-    number_of_frames = int(length / overlap);
-    frames = np.ndarray((number_of_frames, framesize));
-    #Signal Framing
-    for k in range(0, number_of_frames):
-        for i in range(0, framesize):
-            if ((k * overlap + i) < length):
-                frames[k][i] = x_value[k * overlap + i]
-            else:
-                frames[k][i] = 0
+def feature_extraction(path, label):
+    # path='/home/mohammad/Documents/python/Steganalysis/clean';
+    root, dirs, files = next(os.walk(path));
+    sr = [];
+    x = [];
+    xf = [];
+    for file in files:
+        sr_value, x_value = wav.read(root + '/' + file);
+        sr.append(sr_value);
+        x.append(x_value);
+        f = [];
+        length = len(x_value);
+        window_hop_length = 0.02  # 20ms
+        overlap = int(sr_value * window_hop_length);
+        window_size = 0.05  # 5 ms
+        framesize = int(window_size * sr_value);
+        number_of_frames = int(length / overlap);
+        frames = np.ndarray((number_of_frames, framesize));
 
-    #Transfer To Fractal Dimension
-    for k in range(0, number_of_frames):
-        f.append(hfd(frames[k],6));
-    xf.append(f);
+        # Signal Framing
+        for k in range(0, number_of_frames):
+            for i in range(0, framesize):
+                if ((k * overlap + i) < length):
+                    frames[k][i] = x_value[k * overlap + i]
+                else:
+                    frames[k][i] = 0
 
-print(np.matrix(xf));
+        # Transfer To Fractal Dimension
+        for k in range(0, number_of_frames):
+            f.append(hfd(frames[k], 6));
+        xf.append(f);
+
+    Features = DataFrame();
+    for vector in xf:
+        kmeans = KMeans(n_clusters=100, random_state=0).fit(DataFrame(vector));
+        Features = Features.append(DataFrame(kmeans.cluster_centers_).transpose());
+
+    # Add Label Column
+    Features['label'] = label;
+
+    # Export Dataframe To CSV
+    Features.to_csv('/home/mohammad/Documents/python/Steganalysis/feature.csv', mode='a', header=False, index=False);
+
+
+feature_extraction('/home/mohammad/Documents/python/Steganalysis/clean', 0);
+feature_extraction('/home/mohammad/Documents/python/Steganalysis/steg', 1);
