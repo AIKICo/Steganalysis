@@ -1,9 +1,9 @@
 import os, wave, struct, sys, math;
 import numpy as np;
 import scipy.io.wavfile as wav
-import soundfile as sf
 from sklearn.cluster import KMeans
-from pandas import Series, DataFrame
+from sklearn.model_selection import train_test_split
+from pandas import Series, DataFrame,read_csv
 
 
 def hfd(X, Kmax):
