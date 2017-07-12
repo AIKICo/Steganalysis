@@ -1,6 +1,7 @@
 import os, wave, struct, sys, math;
 import numpy as np;
 import scipy.io.wavfile as wav
+import soundfile as sf
 from sklearn.cluster import KMeans
 from pandas import Series, DataFrame
 
@@ -24,36 +25,36 @@ def hfd(X, Kmax):
 
 
 def feature_extraction(path, label):
-    # path='/home/mohammad/Documents/python/Steganalysis/clean';
     root, dirs, files = next(os.walk(path));
     sr = [];
     x = [];
     xf = [];
     for file in files:
-        sr_value, x_value = wav.read(root + '/' + file);
-        sr.append(sr_value);
-        x.append(x_value);
-        f = [];
-        length = len(x_value);
-        window_hop_length = 0.02  # 20ms
-        overlap = int(sr_value * window_hop_length);
-        window_size = 0.05  # 5 ms
-        framesize = int(window_size * sr_value);
-        number_of_frames = int(length / overlap);
-        frames = np.ndarray((number_of_frames, framesize));
+        if file.lower().endswith('.wav'):
+            sr_value, x_value = wav.read(root + '/' + file,'r');
+            sr.append(sr_value);
+            x.append(x_value);
+            f = [];
+            length = len(x_value);
+            window_hop_length = 0.02  # 20ms
+            overlap = int(sr_value * window_hop_length);
+            window_size = 0.05  # 5 ms
+            framesize = int(window_size * sr_value);
+            number_of_frames = int(length / overlap);
+            frames = np.ndarray((number_of_frames, framesize));
 
-        # Signal Framing
-        for k in range(0, number_of_frames):
-            for i in range(0, framesize):
-                if ((k * overlap + i) < length):
-                    frames[k][i] = x_value[k * overlap + i]
-                else:
-                    frames[k][i] = 0
+            # Signal Framing
+            for k in range(0, number_of_frames):
+                for i in range(0, framesize):
+                    if ((k * overlap + i) < length):
+                        frames[k][i] = x_value[k * overlap + i]
+                    else:
+                        frames[k][i] = 0
 
-        # Transfer To Fractal Dimension
-        for k in range(0, number_of_frames):
-            f.append(hfd(frames[k], 6));
-        xf.append(f);
+            # Transfer To Fractal Dimension
+            for k in range(0, number_of_frames):
+                f.append(hfd(frames[k], 6));
+            xf.append(f);
 
     Features = DataFrame();
     for vector in xf:
