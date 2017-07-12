@@ -66,8 +66,6 @@ def feature_extraction(inputfile,path, label):
     Features['label'] = label;
 
     # Export Data frame To CSV
-
-
     Features.to_csv(inputfile, mode='a', header=False, index=False);
 
 
