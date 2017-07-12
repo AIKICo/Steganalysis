@@ -24,7 +24,7 @@ def hfd(X, Kmax):
     return p[0]
 
 
-def feature_extraction(path, label):
+def feature_extraction(inputfile,path, label):
     root, dirs, files = next(os.walk(path));
     sr = [];
     x = [];
@@ -32,13 +32,14 @@ def feature_extraction(path, label):
     for file in files:
         if file.lower().endswith('.wav'):
             sr_value, x_value = wav.read(root + '/' + file,'r');
+
             sr.append(sr_value);
             x.append(x_value);
             f = [];
             length = len(x_value);
-            window_hop_length = 0.02  # 20ms
+            window_hop_length = 0.02  # 2ms = 0.02
             overlap = int(sr_value * window_hop_length);
-            window_size = 0.05  # 5 ms
+            window_size = 0.05  # 5 ms = 0.05
             framesize = int(window_size * sr_value);
             number_of_frames = int(length / overlap);
             frames = np.ndarray((number_of_frames, framesize));
@@ -46,7 +47,7 @@ def feature_extraction(path, label):
             # Signal Framing
             for k in range(0, number_of_frames):
                 for i in range(0, framesize):
-                    if ((k * overlap + i) < length):
+                    if (k * overlap + i) < length:
                         frames[k][i] = x_value[k * overlap + i]
                     else:
                         frames[k][i] = 0
@@ -64,9 +65,15 @@ def feature_extraction(path, label):
     # Add Label Column
     Features['label'] = label;
 
-    # Export Dataframe To CSV
-    Features.to_csv('/home/mohammad/Documents/python/Steganalysis/feature.csv', mode='a', header=False, index=False);
+    # Export Data frame To CSV
 
 
-feature_extraction('/home/mohammad/Documents/python/Steganalysis/clean', 0);
-feature_extraction('/home/mohammad/Documents/python/Steganalysis/steg', 1);
+    Features.to_csv(inputfile, mode='a', header=False, index=False);
+
+
+csv_filename='/home/mohammad/Documents/python/Steganalysis/feature.csv';
+if os.path.isfile(csv_filename):
+    os.remove(csv_filename);
+
+feature_extraction(csv_filename,'/home/mohammad/Documents/python/Steganalysis/clean', 0);
+feature_extraction(csv_filename,'/home/mohammad/Documents/python/Steganalysis/steg', 1);
