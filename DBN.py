@@ -23,13 +23,13 @@ X,Y = loadData('/home/mohammad/Documents/python/Steganalysis/feature.csv',99);
 for i in range(5):
     print('Cross ' + str(i));
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42);
-    classifier = SupervisedDBNClassification(hidden_layers_structure=[128,128],
+    classifier = SupervisedDBNClassification(hidden_layers_structure=[256,256],
                                              learning_rate_rbm=0.05,
                                              learning_rate=0.1,
                                              n_epochs_rbm=10,
                                              n_iter_backprop=1000,
                                              batch_size=32,
-                                             activation_function='sigmoid', #relu,sigmoid
+                                             activation_function='relu', #relu,sigmoid
                                              dropout_p=0.2,
                                              verbose=0);
 
@@ -39,5 +39,5 @@ for i in range(5):
     print('Done.\nAccuracy: %f' % accuracy_score(Y_test, Y_pred))
     print(classification_report(Y_test, Y_pred));
 
-print(scores);
-print(np.mean(scores));
+print('All Accuracy Scores in Cross: ' + str(scores));
+print('Mean Accuracy Scores: ' + str(np.mean(scores)));

@@ -1,4 +1,4 @@
-import os, wave, struct, sys, math;
+import os, wave;
 import numpy as np;
 import scipy.io.wavfile as wav
 from sklearn.cluster import KMeans
@@ -23,10 +23,12 @@ def hfd(X, Kmax):
             x.append([np.log(float(1) / k), 1])
             (p, r1, r2, s) = np.linalg.lstsq(x, L)
         return p[0]
-    except:
+    except Exception as e:
+        print('Excepton: ' + str(e));
         return 0;
 
-def feature_extraction(inputfile,path, label):
+
+def feature_extraction(infile,path, label):
     root, dirs, files = next(os.walk(path));
     sr = [];
     x = [];
@@ -34,9 +36,7 @@ def feature_extraction(inputfile,path, label):
     file_index=1;
     for file in files:
         if file.lower().endswith('.wav'):
-            file_index = file_index + 1;
             sr_value, x_value = wav.read(root + '/' + file,'r');
-
             sr.append(sr_value);
             x.append(x_value);
             f = [];
@@ -61,22 +61,24 @@ def feature_extraction(inputfile,path, label):
                 f.append(hfd(frames[k], 6));
             xf.append(f);
             print('FileName: ' + file + ' Row: ' + str(file_index) + ' Of ' + str(len(files)));
+            file_index = file_index + 1;
 
-    Features = DataFrame();
-    vector_index=1;
+    features = DataFrame();
+    vector_index = 1;
     for vector in xf:
         try:
-            print('Vector: ' + str(vector_index) + ' Vector Length: ' + str(len(vector)));
-            kmeans = KMeans(n_clusters=100, random_state=0).fit(DataFrame(vector));
-            Features = Features.append(DataFrame(kmeans.cluster_centers_).transpose());
-        except:
-            print('Error in vector');
+            km = KMeans(n_clusters=100, random_state=42).fit(DataFrame(vector));
+            features = features.append(DataFrame(km.cluster_centers_).transpose());
+            print('Vector Cluster is Success: ' + str(vector_index) + ' Vector Length: ' + str(len(vector)));
+            vector_index = vector_index + 1;
+        except Exception as e:
+            print('Exception in Clustering:' + str(e));
 
     # Add Label Column
-    Features['label'] = label;
+    features['label'] = label;
 
     # Export Data frame To CSV
-    Features.to_csv(inputfile, mode='a', header=False, index=False);
+    features.to_csv(infile, mode='a', header=False, index=False);
 
 
 csv_filename='/home/mohammad/Documents/python/Steganalysis/feature.csv';
