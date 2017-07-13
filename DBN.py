@@ -20,24 +20,24 @@ def loadData(filename,instanceCol):
 scores = [];
 X,Y = loadData('/home/mohammad/Documents/python/Steganalysis/feature.csv',99);
 
-for i in range(10):
-    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=0);
-    classifier = SupervisedDBNClassification(hidden_layers_structure=[256,128,256],
+for i in range(5):
+    print('Cross ' + str(i));
+    X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42);
+    classifier = SupervisedDBNClassification(hidden_layers_structure=[128,128],
                                              learning_rate_rbm=0.05,
                                              learning_rate=0.1,
                                              n_epochs_rbm=10,
                                              n_iter_backprop=1000,
                                              batch_size=32,
-                                             activation_function='relu', #relu,sigmoid
-                                             dropout_p=0.2);
+                                             activation_function='sigmoid', #relu,sigmoid
+                                             dropout_p=0.2,
+                                             verbose=0);
 
     classifier.fit(X_train, Y_train);
     Y_pred = classifier.predict(X_test);
     scores.append(accuracy_score(Y_test, Y_pred));
-#print(Y_test);
-#print(Y_pred);
-#print('Done.\nAccuracy: %f' % accuracy_score(Y_test, Y_pred))
-#print(classification_report(Y_test, Y_pred));
+    print('Done.\nAccuracy: %f' % accuracy_score(Y_test, Y_pred))
+    print(classification_report(Y_test, Y_pred));
 
 print(scores);
 print(np.mean(scores));
