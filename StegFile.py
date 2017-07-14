@@ -7,4 +7,6 @@ for file in files:
         p = Popen('steghide embed -cf /home/mohammad/Documents/python/Steganalysis/steg/' + file + ' --dontcompress -ef  /home/mohammad/Documents/python/Steganalysis/steg/secret.txt -p kabinet95', shell=True,
                   stdout=PIPE, stderr=PIPE)
         out, err = p.communicate()
-        print(err);
+        print(file)
+        if err!='':
+            print(err);
