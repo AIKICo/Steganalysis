@@ -81,9 +81,9 @@ def feature_extraction(infile,path, label):
     features.to_csv(infile, mode='a', header=False, index=False);
 
 
-csv_filename='/home/mohammad/Documents/python/Steganalysis/feature.csv';
-if os.path.isfile(csv_filename):
-    os.remove(csv_filename);
+csv_filename='/home/mohammad/Documents/python/Steganalysis/feature(4000-4000-500b).csv';
+#if os.path.isfile(csv_filename):
+    #os.remove(csv_filename);
 
-feature_extraction(csv_filename,'/home/mohammad/Documents/python/Steganalysis/clean', 0);
+#feature_extraction(csv_filename,'/home/mohammad/Documents/python/Steganalysis/clean', 0);
 feature_extraction(csv_filename,'/home/mohammad/Documents/python/Steganalysis/steg', 1);
