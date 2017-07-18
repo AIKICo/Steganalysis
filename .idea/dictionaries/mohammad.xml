@@ -6,11 +6,13 @@
       <w>framesize</w>
       <w>kabinet</w>
       <w>loaddata</w>
+      <w>modeldata</w>
       <w>pred</w>
       <w>relu</w>
       <w>steg</w>
       <w>steganalysis</w>
       <w>steghide</w>
+      <w>traincount</w>
     </words>
   </dictionary>
 </component>
