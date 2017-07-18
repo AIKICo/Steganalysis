@@ -82,7 +82,7 @@ def feature_extraction(infile,path, label):
     features.to_csv(infile, mode='a', header=False, index=False)
 
 
-csv_filename='/home/mohammad/Documents/python/Steganalysis/feature(4000-4000-1000b).csv'
+csv_filename='/home/mohammad/Documents/python/Steganalysis/feature(4000-4000-1400b).csv'
 
 # if os.path.isfile(csv_filename):
 # os.remove(csv_filename)
