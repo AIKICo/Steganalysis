@@ -1,0 +1,36 @@
+Iteration 1
+Accuracy: 0.497903
+             precision    recall  f1-score   support
+
+          0       0.50      0.87      0.64       836
+          1       0.49      0.12      0.20       833
+
+avg / total       0.49      0.50      0.42      1669
+
+*****************************************************
+Iteration 2
+Accuracy: 0.484721
+             precision    recall  f1-score   support
+
+          0       0.49      0.68      0.57       836
+          1       0.47      0.29      0.36       833
+
+avg / total       0.48      0.48      0.46      1669
+
+*****************************************************
+Iteration 3
+Accuracy: 0.494907
+             precision    recall  f1-score   support
+
+          0       0.49      0.15      0.23       836
+          1       0.50      0.84      0.62       833
+
+avg / total       0.49      0.49      0.43      1669
+
+*****************************************************
+All Accuracy Scores in ۳ Iteration: 
+[0.49790293588975432, 0.48472139005392451, 0.49490713001797482]
+Mean Accuracy Scores in ۳ Iteration: 0.492510485321
+
+Process finished with exit code 0
+

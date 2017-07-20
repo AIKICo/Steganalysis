@@ -24,7 +24,7 @@ def modeldata(filename):
 
     for i in range(3):
         print('Cross ' + str(i))
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
+        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
         # relu, sigmoid
         classifier = SupervisedDBNClassification(hidden_layers_structure=[256, 256, 128],
                                                  learning_rate_rbm=0.06,
@@ -34,7 +34,7 @@ def modeldata(filename):
                                                  batch_size=32,
                                                  activation_function='sigmoid',
                                                  dropout_p=0.2,
-                                                 verbose=0);
+                                                 verbose=0)
         classifier.fit(X_train, Y_train)
         Y_pred = classifier.predict(X_test)
         scores.append(accuracy_score(Y_test, Y_pred))
@@ -43,7 +43,7 @@ def modeldata(filename):
     print('All Accuracy Scores in Cross: ' + str(scores))
     print('Mean Accuracy Scores: ' + str(np.mean(scores)))
 
-modeldata('/home/mohammad/Documents/python/Steganalysis/feature(4000-4000-90b).csv')
-modeldata('/home/mohammad/Documents/python/Steganalysis/feature(4000-4000-500b).csv')
-modeldata('/home/mohammad/Documents/python/Steganalysis/feature(4000-4000-1000b).csv')
-modeldata('/home/mohammad/Documents/python/Steganalysis/feature(4000-4000-1400b).csv')
+modeldata('/home/mohammad/Documents/python/Steganalysis/feature(1200-4000-90b).csv')
+modeldata('/home/mohammad/Documents/python/Steganalysis/feature(1200-4000-500b).csv')
+modeldata('/home/mohammad/Documents/python/Steganalysis/feature(1200-4000-1000b).csv')
+modeldata('/home/mohammad/Documents/python/Steganalysis/feature(1200-4000-1400b).csv')
