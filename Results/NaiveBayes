@@ -1,0 +1,15 @@
+D:\IntelPython3\python.exe "D:/My Source Codes/Projects-Python/Steganalysis/NaiveBayes.py"
+D:\Databases\PDA\CSV\feature(MFCC-70-30-1400b).csv
+All Accuracy Scores in Cross: [0.62820512820512819, 0.62820512820512819, 0.62820512820512819]
+Mean Accuracy Scores: 0.628205128205
+D:\Databases\PDA\CSV\feature(FBank-70-30-1400b).csv
+All Accuracy Scores in Cross: [0.35256410256410259, 0.35256410256410259, 0.35256410256410259]
+Mean Accuracy Scores: 0.352564102564
+D:\Databases\PDA\CSV\feature(LogFBank-70-30-1400b).csv
+All Accuracy Scores in Cross: [0.64423076923076927, 0.64423076923076927, 0.64423076923076927]
+Mean Accuracy Scores: 0.644230769231
+D:\Databases\PDA\CSV\feature(Fractal-70-30-1400b).csv
+All Accuracy Scores in Cross: [0.61935483870967745, 0.61935483870967745, 0.61935483870967745]
+Mean Accuracy Scores: 0.61935483871
+
+Process finished with exit code 0

@@ -35,7 +35,8 @@ def modeldata(filename):
     print('All Accuracy Scores in Cross: ' + str(scores))
     print('Mean Accuracy Scores: ' + str(np.mean(scores)))
 
-modeldata('D:\\My Source Codes\\Projects-Python\\Steganalysis\\ThirdGroup\\feature(1200-4000-90b).csv')
-modeldata('D:\\My Source Codes\\Projects-Python\\Steganalysis\\ThirdGroup\\feature(1200-4000-500b).csv')
-modeldata('D:\\My Source Codes\\Projects-Python\\Steganalysis\\ThirdGroup\\feature(1200-4000-1000b).csv')
-modeldata('D:\\My Source Codes\\Projects-Python\\Steganalysis\\ThirdGroup\\feature(1200-4000-1400b).csv')
+if __name__ == '__main__':
+    modeldata('D:\\Databases\\PDA\\CSV\\feature(MFCC-70-30-1400b).csv')
+    modeldata('D:\\Databases\\PDA\\CSV\\feature(FBank-70-30-1400b).csv')
+    modeldata('D:\\Databases\\PDA\\CSV\\feature(LogFBank-70-30-1400b).csv')
+    modeldata('D:\\Databases\\PDA\\CSV\\feature(Fractal-70-30-1400b).csv')

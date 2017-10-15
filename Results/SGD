@@ -1,0 +1,15 @@
+D:\IntelPython3\python.exe "D:/My Source Codes/Projects-Python/Steganalysis/SGD.py"
+D:\Databases\PDA\CSV\feature(MFCC-70-30-1400b).csv
+All Accuracy Scores in Cross: [0.66666666666666663, 0.70512820512820518, 0.74358974358974361]
+Mean Accuracy Scores: 0.705128205128
+D:\Databases\PDA\CSV\feature(FBank-70-30-1400b).csv
+All Accuracy Scores in Cross: [0.74038461538461542, 0.71474358974358976, 0.38461538461538464]
+Mean Accuracy Scores: 0.613247863248
+D:\Databases\PDA\CSV\feature(LogFBank-70-30-1400b).csv
+All Accuracy Scores in Cross: [0.74038461538461542, 0.72435897435897434, 0.71474358974358976]
+Mean Accuracy Scores: 0.726495726496
+D:\Databases\PDA\CSV\feature(Fractal-70-30-1400b).csv
+All Accuracy Scores in Cross: [0.7129032258064516, 0.71612903225806457, 0.7129032258064516]
+Mean Accuracy Scores: 0.713978494624
+
+Process finished with exit code 0

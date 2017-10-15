@@ -1,0 +1,14 @@
+D:\IntelPython3\python.exe "D:/My Source Codes/Projects-Python/Steganalysis/SVM.py"
+D:\Databases\PDA\CSV\feature(MFCC-70-30-1400b).csv
+All Accuracy Scores in Cross: [0.74358974358974361, 0.74358974358974361, 0.74358974358974361]
+Mean Accuracy Scores: 0.74358974359
+D:\Databases\PDA\CSV\feature(FBank-70-30-1400b).csv
+All Accuracy Scores in Cross: [0.74358974358974361, 0.74358974358974361, 0.74358974358974361]
+Mean Accuracy Scores: 0.74358974359
+D:\Databases\PDA\CSV\feature(LogFBank-70-30-1400b).csv
+All Accuracy Scores in Cross: [0.74358974358974361, 0.74358974358974361, 0.74358974358974361]
+Mean Accuracy Scores: 0.74358974359
+D:\Databases\PDA\CSV\feature(Fractal-70-30-1400b).csv
+All Accuracy Scores in Cross: [0.71935483870967742, 0.71935483870967742, 0.71935483870967742]
+Mean Accuracy Scores: 0.71935483871
+

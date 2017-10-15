@@ -21,20 +21,27 @@ def modeldata(filename):
     print(filename)
     X,Y = loaddata(filename, 99)
 
-    for i in range(3):
-        #print('Cross ' + str(i))
-        X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
-        # relu, sigmoid
-        classifier = KNeighborsClassifier(n_neighbors=3);
+    for i in range(1):
+        np.random.seed(13)
+        indices = np.random.permutation(1000)
+        test_size = int(0.1 * len(indices))
+        X_train = X[indices[:-test_size]]
+        Y_train = Y[indices[:-test_size]]
+        X_test = X[indices[-test_size:]]
+        Y_test = Y[indices[-test_size:]]
+        classifier = KNeighborsClassifier(n_neighbors=2)
         classifier.fit(X_train, Y_train)
         Y_pred = classifier.predict(X_test)
         scores.append(accuracy_score(Y_test, Y_pred))
-        #print(classification_report(Y_test, Y_pred))
+        print(classification_report(Y_test, Y_pred))
 
     print('All Accuracy Scores in Cross: ' + str(scores))
     print('Mean Accuracy Scores: ' + str(np.mean(scores)))
 
-modeldata('D:\\My Source Codes\\Projects-Python\\Steganalysis\\ThirdGroup\\feature(1200-4000-90b).csv')
-modeldata('D:\\My Source Codes\\Projects-Python\\Steganalysis\\ThirdGroup\\feature(1200-4000-500b).csv')
-modeldata('D:\\My Source Codes\\Projects-Python\\Steganalysis\\ThirdGroup\\feature(1200-4000-1000b).csv')
-modeldata('D:\\My Source Codes\\Projects-Python\\Steganalysis\\ThirdGroup\\feature(1200-4000-1400b).csv')
+
+if __name__ == '__main__':
+    modeldata('D:\\Databases\\PDA\\CSV\\feature(FBank-70-30-1400b).csv')
+    modeldata('D:\\Databases\\PDA\\CSV\\feature(Fractal-70-30-1400b).csv')
+    modeldata('D:\\Databases\\PDA\\CSV\\feature(LogFBank-70-30-1400b).csv')
+    modeldata('D:\\Databases\\PDA\\CSV\\feature(MFCC-70-30-1400b).csv')
+

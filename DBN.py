@@ -35,7 +35,7 @@ def fractal_modeldata(filename):
                                                  learning_rate_rbm=0.05,
                                                  learning_rate=0.2,
                                                  n_epochs_rbm=30,
-                                                 n_iter_backprop=4000,
+                                                 n_iter_backprop=2000,
                                                  batch_size=16,
                                                  activation_function='sigmoid',
                                                  dropout_p=0.1,
@@ -50,4 +50,4 @@ def fractal_modeldata(filename):
 
 
 if __name__ == '__main__':
-    fractal_modeldata('D:\\Databases\\PDA\\CSV\\feature(Fractal-70-30-1400b).csv')
+    fractal_modeldata('D:\\Databases\\PDA\\CSV\\feature(Energy-70-30-1400b).csv')

@@ -2,8 +2,8 @@ import os, wave
 import numpy as np
 import scipy.io.wavfile as wav
 from sklearn.cluster import KMeans
-from sklearn.model_selection import train_test_split
-from pandas import Series, DataFrame,read_csv
+from python_speech_features import fbank
+from pandas import DataFrame
 
 
 def hfd(X, Kmax):
@@ -55,7 +55,9 @@ def feature_extraction(infile,path, label):
                         frames[k][i] = x_value[k * overlap + i]
                     else:
                         frames[k][i] = 0
-                f.append(hfd(frames[k], 6))
+                # f.append(hfd(frames[k], 6))
+                MFCC = fbank(frames[k], sr_value)
+                f.append(MFCC[1].mean())
 
             xf.append(f)
             print('FileName: ' + file + ' Row: ' + str(file_index) + ' Of ' + str(len(files)))
@@ -80,6 +82,6 @@ def feature_extraction(infile,path, label):
 
 
 if __name__ == '__main__':
-    csv_filename = 'D:\\Databases\\PDA\\CSV\\feature(70-30-1400b).csv'
+    csv_filename = 'D:\\Databases\\PDA\\CSV\\feature(Energy-70-30-1400b).csv'
     feature_extraction(csv_filename, 'D:\\Databases\\PDA\\Normal', 0)
     feature_extraction(csv_filename, 'D:\\Databases\\PDA\\StegHide', 1)
