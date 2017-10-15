@@ -1,0 +1,10 @@
+D:\Databases\PDA\CSV\feature(Fractal-70-30-1400b).csv
+             precision    recall  f1-score   support
+
+          0       0.70      0.91      0.79        68
+          1       0.45      0.16      0.23        32
+
+avg / total       0.62      0.67      0.61       100
+
+All Accuracy Scores in Cross: [0.67000000000000004]
+Mean Accuracy Scores: 0.67

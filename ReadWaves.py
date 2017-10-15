@@ -57,9 +57,6 @@ def feature_extraction(infile,path, label):
                         frames[k][i] = 0
                 f.append(hfd(frames[k], 6))
 
-            # Transfer To Fractal Dimension
-            # for k in range(0, number_of_frames):
-            # f.append(hfd(frames[k], 6))
             xf.append(f)
             print('FileName: ' + file + ' Row: ' + str(file_index) + ' Of ' + str(len(files)))
             file_index = file_index + 1
@@ -82,10 +79,7 @@ def feature_extraction(infile,path, label):
     features.to_csv(infile, mode='a', header=False, index=False)
 
 
-csv_filename='/home/mohammad/Documents/python/Steganalysis/feature(4000-4000-1400b).csv'
-
-# if os.path.isfile(csv_filename):
-# os.remove(csv_filename)
-
-# feature_extraction(csv_filename,'/home/mohammad/Documents/python/Steganalysis/clean', 0)
-feature_extraction(csv_filename,'/home/mohammad/Documents/python/Steganalysis/steg', 1)
+if __name__ == '__main__':
+    csv_filename = 'D:\\Databases\\PDA\\CSV\\feature(70-30-1400b).csv'
+    feature_extraction(csv_filename, 'D:\\Databases\\PDA\\Normal', 0)
+    feature_extraction(csv_filename, 'D:\\Databases\\PDA\\StegHide', 1)
