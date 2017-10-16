@@ -1,9 +1,11 @@
 import csv
 import numpy as np
-from sklearn.model_selection import train_test_split
+from sklearn.metrics import roc_curve, auc
 from sklearn.metrics.classification import accuracy_score
 from sklearn.metrics import classification_report
 from dbn.tensorflow import SupervisedDBNClassification
+import matplotlib.pyplot as plt
+
 # from dbn import SupervisedDBNClassification
 
 
@@ -44,10 +46,23 @@ def fractal_modeldata(filename):
         Y_pred = classifier.predict(X_test)
         scores.append(accuracy_score(Y_test, Y_pred))
         print(classification_report(Y_test, Y_pred))
+        fpr, tpr, threshold = roc_curve(Y_test, Y_pred)
+        roc_auc = auc(fpr, tpr)
+        plt.title('Receiver Operating Characteristic')
+        plt.plot(fpr, tpr, 'b', label='AUC = %0.2f' % roc_auc)
+        plt.legend(loc='lower right')
+        plt.plot([0, 1], [0, 1], 'r--')
+        plt.xlim([0, 1])
+        plt.ylim([0, 1])
+        plt.ylabel('True Positive Rate')
+        plt.xlabel('False Positive Rate')
+        plt.show()
 
     print('All Accuracy Scores in Cross: ' + str(scores))
     print('Mean Accuracy Scores: ' + str(np.mean(scores)))
 
 
 if __name__ == '__main__':
-    fractal_modeldata('D:\\Databases\\PDA\\CSV\\feature(Energy-70-30-1400b).csv')
+    fractal_modeldata('D:\\Databases\\PDA\\CSV\\feature(FBank-70-30-1400b).csv')
+    fractal_modeldata('D:\\Databases\\PDA\\CSV\\feature(LogFBank-70-30-1400b).csv')
+    fractal_modeldata('D:\\Databases\\PDA\\CSV\\feature(MFCC-70-30-1400b).csv')
